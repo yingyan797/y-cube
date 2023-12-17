@@ -28,7 +28,48 @@
 </head>
 
 <body>
-    <div class="row">
-        <h1 style="background-color: lightgoldenrodyellow;">Cube simulation</h1>
-    <div class="column" style="background-color: lightcyan;">
-        <img src="static/visual.png" alt="cube">
+    <div class="column">
+      <img src="static/visual.png" alt="cube">
+      <form action="/" method="post"><table>
+        <tr><th><input type="submit" name="rsectl" value="Group left" title="Roate the entire segment counter-clockwise">
+          <input type="submit" name="rsectr" value="Group right" title="Roate the entire segment clockwise"></th>
+          {% for p in pos %}
+          <td><input type="checkbox" name="loc{{p}}" value="position {{p}}">{{p}}</td>
+          {% endfor %}
+        </tr>
+        {% for ax in cube.axname %}
+        <tr>
+          <th><input type="radio" name="axis" value="{{ax}}">{{ax}}-axis</th>
+          {% for p in pos %}
+            <td><input type="submit" name="rotate" value="{{ax}}{{p}}L" title="Rotate left (counter-clockwise)">
+            <input type="submit" name="rotate" value="{{ax}}{{p}}R" title="Rotate right (clockwise)"></td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    </form>
+    </div>
+    <div class="column">
+      <h1 style="background-color: lightgoldenrodyellow;">Cube simulation</h1>
+      <form action="/" method="post">
+        Select cube dimension (2-20, default 3): <input type="number" min="2" max="20" name="dimension">
+        <input type="submit" name="create" value="Create cube">
+        <br>Cube options: <input type="submit" name="random" value="Shuffle cube randomly"> | 
+        <input type="submit" name="init" value="Reset cube to default"> ; 
+        <input type="submit" name="rec" value="Record moves"> | <input type="submit" name="recstop" value="Stop record">
+      </form>  
+      Cube dimension: {{cube.dim}} | Recording cube moves: {{cube.rec}} <br>
+      Recent cube moves: <br>
+      <table>
+        <tr><th>Step no.</th><th>Axis</th><th>From</th><th>To</th><th>Direction</th></tr>
+        {% for step in recent %}
+        <tr>
+          {% for t in step %}<td>{{t}}</td>{% endfor %}</tr>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+      
+
+
+
