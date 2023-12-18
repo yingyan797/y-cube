@@ -18,7 +18,7 @@ class Cube:
         d = np.array([0,-u[2]])
         self.basis1 = [(rd,ld), (rd,d), (-ld, d)]
         self.basis2 = [self.basis1[i] for i in [2,1,0]]
-        self.rec = False
+        self.rec = True
         self.maxrec = 10
     
     def clearRecord(self):

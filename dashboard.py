@@ -50,5 +50,9 @@ def index():
     print(rec)
     return render_template('index.html', cube=sim, pos=[i for i in range(sim.dim)], recent=rec)
 
+@app.route('/help', methods=['GET', 'POST'])    
+def help():
+    return render_template('help.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
